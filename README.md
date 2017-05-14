@@ -69,7 +69,7 @@ GeoHash是目前比较主流实现位置服务的技术，Geohash算法将经纬
 ```
 
 ### 边界问题
-两个位置距离得越进是否意味着Geohash前面相同的越多呢？答案是否定的，两个很近的地点[116.3967,44.9999]和[116.3967,45.0009]的Geohash分别是**wxfzbxvr**和**y84b08j2**，这就是Geohash存在的边界问题，这两个地点虽然很近，但是刚好在分界点45两侧，导致Geohash完全不同，单纯依靠Geohash匹配前缀的方式并不能解决这种问题
+两个位置距离得越近是否意味着Geohash前面相同的越多呢？答案是否定的，两个很近的地点[116.3967,44.9999]和[116.3967,45.0009]的Geohash分别是**wxfzbxvr**和**y84b08j2**，这就是Geohash存在的边界问题，这两个地点虽然很近，但是刚好在分界点45两侧，导致Geohash完全不同，单纯依靠Geohash匹配前缀的方式并不能解决这种问题
 ![](http://img.blog.csdn.net/20151219162034350?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhb2ppbWFubWFu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 在一维空间解决不了这个问题，回到二维空间中，将当前Geohash这块区域周围的八块区域的Geohash计算出来
