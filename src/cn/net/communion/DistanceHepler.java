@@ -1,7 +1,7 @@
 package cn.net.communion;
 
 public class DistanceHepler {
-    private static double EARTH_RADIUS = 6378.137f;
+    private final static double Earth_Radius = 6378.137f;
 
     public static double distance(double lat1, double lng1, double lat2, double lng2) {
         double x1 = Math.cos(lat1) * Math.cos(lng1);
@@ -14,7 +14,7 @@ public class DistanceHepler {
 
         double lineDistance =
                 Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
-        double realDistance = EARTH_RADIUS * Math.PI * 2 * Math.asin(0.5 * lineDistance) / 180;
+        double realDistance = Earth_Radius * Math.PI * 2 * Math.asin(0.5 * lineDistance) / 180;
         return realDistance;
     }
 

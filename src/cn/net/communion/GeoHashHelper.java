@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeoHashHelper {
-    private final double Max_Lat = 90;
-    private final double Min_Lat = -90;
-    private final double Max_Lng = 180;
-    private final double Min_Lng = -180;
-    private final int length = 15;
-    private final double latUnit = (Max_Lat - Min_Lat) / Math.pow(2, 15);
-    private final double lngUnit = (Max_Lng - Min_Lng) / Math.pow(2, 15);
+    public final double Max_Lat = 90;
+    public final double Min_Lat = -90;
+    public final double Max_Lng = 180;
+    public final double Min_Lng = -180;
+    private final int length = 20;
+    private final double latUnit = (Max_Lat - Min_Lat) / (1 << 20);
+    private final double lngUnit = (Max_Lng - Min_Lng) / (1 << 20);
     private final String[] base32Lookup =
             {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "b", "c", "d", "e", "f", "g", "h",
                     "j", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
@@ -34,18 +34,18 @@ public class GeoHashHelper {
         StringBuilder sb = new StringBuilder();
         for (int start = 0; start < str.length(); start = start + 5) {
             unit = str.substring(start, start + 5);
-            sb.append(base32Lookup[convertToIndex(unit.split(""))]);
+            sb.append(base32Lookup[convertToIndex(unit)]);
         }
         return sb.toString();
     }
 
-    private int convertToIndex(String[] arrStr) {
-        int length = arrStr.length;
-        int index = 0;
-        for (int start = 0; start < length; start++) {
-            index += arrStr[start].equals("0") ? 0 : Math.pow(2, length - 1 - start);
+    private int convertToIndex(String str) {
+        int length = str.length();
+        int result = 0;
+        for (int index = 0; index < length; index++) {
+            result += str.charAt(index) == '0' ? 0 : 1 << (length - 1 - index);
         }
-        return index;
+        return result;
     }
 
     public String encode(double lat, double lng) {
