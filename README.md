@@ -1,0 +1,2 @@
+# GeoHash
+GeoHash是目前比较主流实现位置服务的技术，用最简洁的Java实现GeoHash算法
